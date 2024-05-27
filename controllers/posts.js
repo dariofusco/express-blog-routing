@@ -26,10 +26,15 @@ const show = (req, res) => {
 
     //res.json(jsonPost);
 
-    res.json({
-        ...jsonPost,
-        image_url: `http://${req.headers.host}/${jsonPost.image}`
-    });
+    if (jsonPost) {
+        res.json({
+            ...jsonPost,
+            image_url: `http://${req.headers.host}/${jsonPost.image}`
+        });
+    } else {
+        res.status(404).json("Not Found");
+    }
+
 }
 
 const create = (req, res) => {
