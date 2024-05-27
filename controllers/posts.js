@@ -8,7 +8,7 @@ const index = (req, res) => {
     posts.forEach(post => {
         html += `<li>
                     <div>
-                        <h3>${post.title}</h3>
+                        <a href="${post.slug}"><h1>${post.title}</h1></a>
                         <img width="200" src=${`/${post.image}`} />
                         <p><strong>Ingredienti</strong>: ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join(', ')}</p>
                     </div>
@@ -24,11 +24,27 @@ const show = (req, res) => {
     const slugPost = req.params.slug;
     const jsonPost = posts.find(post => post.slug === slugPost);
 
-    res.json(jsonPost);
+    //res.json(jsonPost);
+
+    res.json({
+        ...jsonPost,
+        image_url: `http://${req.headers.host}/${jsonPost.image}`
+    });
 }
 
 const create = (req, res) => {
-    res.send(`<h1>Creazione nuovo post</h1>`);
+
+    res.format({
+        html: () => {
+            res.send(`<h1>Creazione nuovo post</h1>`);
+        },
+        json: () => {
+            res.status(406).json({
+                error: "Not Acceptable",
+            });
+        }
+    });
+
 }
 
 const download = (req, res) => {
