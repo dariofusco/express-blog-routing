@@ -22,16 +22,15 @@ const show = (req, res) => {
     const slugPost = req.params.slug;
     const jsonPost = posts.find(post => post.slug === slugPost);
 
-    res.format({
-        json: () => {
-            if (jsonPost) {
-                res.json(jsonPost);
-            }
-        }
-    })
+    res.json(jsonPost);
+}
+
+const create = (req, res) => {
+    res.send(`<h1>Creazione nuovo post</h1>`);
 }
 
 module.exports = {
     index,
     show,
+    create,
 }

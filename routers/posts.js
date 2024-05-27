@@ -4,9 +4,9 @@ const postsControllers = require("../controllers/posts");
 
 router.get("/", postsControllers.index);
 
-router.get("/:slug", postsControllers.show);
+router.get("/create", postsControllers.create);
 
-// router.get("/create", postsControllers.create);
+router.get("/:slug", postsControllers.show);
 
 //router.get("/:slug/download", postsControllers.download);
 
