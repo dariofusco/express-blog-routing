@@ -1,3 +1,5 @@
+const path = require("path");
+const fs = require("fs");
 let posts = require("../db/posts.json");
 
 const index = (req, res) => {
@@ -29,8 +31,16 @@ const create = (req, res) => {
     res.send(`<h1>Creazione nuovo post</h1>`);
 }
 
+const download = (req, res) => {
+
+    const slugPost = req.params.slug;
+    const selectedPost = posts.find(post => post.slug === slugPost);
+    res.download(`${__dirname}/../public/${selectedPost.image}`);
+}
+
 module.exports = {
     index,
     show,
     create,
+    download
 }

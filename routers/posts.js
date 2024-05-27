@@ -8,6 +8,6 @@ router.get("/create", postsControllers.create);
 
 router.get("/:slug", postsControllers.show);
 
-//router.get("/:slug/download", postsControllers.download);
+router.get("/:slug/download", postsControllers.download);
 
 module.exports = router;
