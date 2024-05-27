@@ -14,9 +14,24 @@ const index = (req, res) => {
     });
     html += '</ul>';
     res.send(html);
-    
+
+}
+
+const show = (req, res) => {
+
+    const slugPost = req.params.slug;
+    const jsonPost = posts.find(post => post.slug === slugPost);
+
+    res.format({
+        json: () => {
+            if (jsonPost) {
+                res.json(jsonPost);
+            }
+        }
+    })
 }
 
 module.exports = {
     index,
+    show,
 }
